@@ -15,15 +15,11 @@ class App extends Component {
   handleQuery = e => {
     e.preventDefault();
     const query = e.target.name.value;
-    console.log(query);
-    query ? this.getBooks(query) : alert('Please enter a topic for your search');
-    e.target.name.value = '';
-    
-  }
-
- 
-
-  
+    query
+      ? this.getBooks(query)
+      : alert("Please enter a topic for your search");
+    e.target.name.value = "";
+  };
 
   getBooks(query) {
     var fullURL =
@@ -31,19 +27,11 @@ class App extends Component {
       query +
       "&startIndex=0&maxResults=20&key=AIzaSyC10CZ4XkZNmjshEPGYL_gQIREG5tJnFeQ";
 
-
-
-    console.log(fullURL);
-    console.log(query)
-
     fetch(`${fullURL}`)
-    .then(results => results.json())
-    .then(data => {
-
-      this.setState({ bookList: data.items });
-
-      console.log(this.state.bookList)
-    });
+      .then(results => results.json())
+      .then(data => {
+        this.setState({ bookList: data.items });
+      });
   }
 
   render() {
@@ -51,17 +39,23 @@ class App extends Component {
       <div>
         <div className="App">
           <h1>Book Finder</h1>
-          <form onSubmit={(e) => this.handleQuery(e)}>
+          <form onSubmit={e => this.handleQuery(e)}>
             <input type="text" name="name" />
             <button>Find</button>
           </form>
 
           <hr />
 
-          
-            
-
-
+          {this.state.bookList.map(book => (
+            <Book 
+            key={book.id} 
+            image={book.volumeInfo.imageLinks}
+            title={book.volumeInfo.title}
+            publisher={book.volumeInfo.publisher}
+            author={book.volumeInfo.authors}
+            extLink={book.volumeInfo.infoLink}
+             />
+          ))}
         </div>
       </div>
     );
