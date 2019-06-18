@@ -1,44 +1,71 @@
-import React, { useState } from "react";
+import React, { Component } from "react";
 import Book from "./book";
 
 import logo from "../logo.svg";
 import "../App.scss";
 
-function App() {
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      bookList: []
+    };
+  }
+
+  handleQuery = e => {
+    e.preventDefault();
+    const query = e.target.name.value;
+    console.log(query);
+    query ? this.getBooks(query) : alert('Please enter a topic for your search');
+    e.target.name.value = '';
+    
+  }
+
+ 
+
   
 
-  let getBooks = query => {
+  getBooks(query) {
     var fullURL =
       "https://www.googleapis.com/books/v1/volumes?q=" +
       query +
-      "&startIndex=0&maxResults=20&key=AIzaSyBMR9EuN0ZcSXWLLdEvH1Q60t92NoaE-KQ";
+      "&startIndex=0&maxResults=20&key=AIzaSyC10CZ4XkZNmjshEPGYL_gQIREG5tJnFeQ";
+
+
 
     console.log(fullURL);
+    console.log(query)
 
     fetch(`${fullURL}`)
-      .then(results => {
-        return results.json();
-      })
-      .then(data => {
-        let bookData = data.items;
+    .then(results => results.json())
+    .then(data => {
 
-        console.log(bookData);
-      });
-  };
+      this.setState({ bookList: data.items });
 
-  return (
-    <div className="App">
-      <h1>Book Finder</h1>
-      <form onSubmit={getBooks("apple")}>
-        <input type="text" name="name" />
-        <button>Find</button>
-      </form>
+      console.log(this.state.bookList)
+    });
+  }
 
-      <hr />
+  render() {
+    return (
+      <div>
+        <div className="App">
+          <h1>Book Finder</h1>
+          <form onSubmit={(e) => this.handleQuery(e)}>
+            <input type="text" name="name" />
+            <button>Find</button>
+          </form>
 
-      <Book />
-    </div>
-  );
+          <hr />
+
+          
+            
+
+
+        </div>
+      </div>
+    );
+  }
 }
 
 export default App;
