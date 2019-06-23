@@ -1,0 +1,46 @@
+@import "../Variables.scss";
+
+.App {
+  text-align: center;
+
+  h1, h2, h3 {
+    font-family: $font-primary;
+  }
+
+  h1 {
+    font-size: 4rem;
+    text-transform: uppercase;
+  }
+
+  .finder {
+    font-family: $font-secondary;
+    text-transform: none;
+    letter-spacing: .25rem;
+  }
+}
+
+.book-results {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  overflow: auto;
+  height: 80vh;
+  
+}
+
+.body-heading {
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  // box-shadow: 3px 3px 3px rgba(167, 167, 167, 0.255);
+  padding: 1rem;
+  // margin: 1rem;
+  z-index: 10;
+  height: 20vh;
+}
+
+.search-input {
+  border: 1px solid black;
+  font-size: 1rem;
+  padding: .75rem;
+  width: 20rem;
+}

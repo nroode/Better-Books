@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import Book from "./book";
 
-import logo from "../logo.svg";
-import "../App.scss";
+import "./App.scss";
+import "./Book.scss";
 
 class App extends Component {
   constructor(props) {
@@ -35,27 +35,29 @@ class App extends Component {
   }
 
   render() {
+    console.log(this.state.bookList);
     return (
       <div>
         <div className="App">
-          <h1>Book Finder</h1>
-          <form onSubmit={e => this.handleQuery(e)}>
-            <input type="text" name="name" />
-            <button>Find</button>
-          </form>
-
-          <hr />
-
+          <div className="body-heading">
+            <h1>Book <span className="finder">finder</span></h1>
+            <form onSubmit={e => this.handleQuery(e)}>
+              <input type="text" name="name" className="search-input" />
+              <button className="btn">Find</button>
+            </form>
+          </div>
+        <div className="book-results">
           {this.state.bookList.map(book => (
-            <Book 
-            key={book.id} 
-            image={book.volumeInfo.imageLinks}
-            title={book.volumeInfo.title}
-            publisher={book.volumeInfo.publisher}
-            author={book.volumeInfo.authors}
-            extLink={book.volumeInfo.infoLink}
-             />
+            <Book
+              key={book.id}
+              image={book.volumeInfo.imageLinks}
+              title={book.volumeInfo.title}
+              publisher={book.volumeInfo.publisher}
+              author={book.volumeInfo.authors}
+              extLink={book.volumeInfo.infoLink}
+            />
           ))}
+          </div>
         </div>
       </div>
     );

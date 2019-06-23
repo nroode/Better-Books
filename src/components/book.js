@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 
+import "./Book.scss";
+
+
 class Book extends Component {
   constructor(props) {
     super(props);
@@ -9,20 +12,24 @@ class Book extends Component {
     return (
       <div className="book">
         <div className="book-cover">
-          <img
-            src={this.props.image ? this.props.image.thumbnail : "no image"}
-            alt="cover-image"
-          />
+          {this.props.image ?
+            <img
+            src={this.props.image.thumbnail}
+            alt="book-cover"
+            className="book-img"
+          /> : "no image"
+        
+        }
         </div>
         <div className="book-details">
-          <h3>{this.props.title}</h3>
-          <p>By: {this.props.author ? this.props.author.join(" & ") : "n/a"}</p>
+          <h3 className="book-title">{this.props.title}</h3>
+          <p>By: {this.props.author ? this.props.author.join(" & ") : "Unspecified"}</p>
 
-          {this.props.publisher ? this.props.publisher : "n/a"}
-          <a href={this.props.extLink}>
-            <button>More</button>
-          </a>
+          <p>Publisher: {this.props.publisher ? this.props.publisher : "Unspecified"}</p>
         </div>
+        <a href={this.props.extLink}>
+            <button className="btn">More</button>
+        </a>
       </div>
     );
   }
