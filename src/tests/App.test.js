@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from '../components/App';
+import mockAxios from 'axios';
 import { exportAllDeclaration } from '@babel/types';
 
 it('renders without crashing', () => {
@@ -9,9 +10,4 @@ it('renders without crashing', () => {
   ReactDOM.unmountComponentAtNode(div);
 });
 
-const generateGreeting = (name) => `hi ${name}!`;
 
-test('should generate greeting', () => {
-  const result = generateGreeting('Mike');
-  expect(result).toBe(`hi Mike!`);
-})

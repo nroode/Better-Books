@@ -3,19 +3,22 @@
 .App {
   text-align: center;
 
-  h1, h2, h3 {
+  h1,
+  h2,
+  h3 {
     font-family: $font-primary;
   }
 
   h1 {
     font-size: 4rem;
     text-transform: uppercase;
+    color: rgb(255, 255, 255);
   }
 
   .finder {
     font-family: $font-secondary;
     text-transform: none;
-    letter-spacing: .25rem;
+    letter-spacing: 0.25rem;
   }
 }
 
@@ -25,22 +28,52 @@
   justify-content: center;
   overflow: auto;
   height: 80vh;
-  
+  background: linear-gradient($theme-dark, rgba(255, 255, 255, 0.637));
+
+  &-message {
+    font-size: 1.2rem;
+    color: white;
+    margin: 5rem;
+    max-width: 300px;
+    line-height: 1.5;
+    font-family: $font-secondary;
+  }
 }
 
 .body-heading {
-  border-top: 1px solid black;
-  border-bottom: 1px solid black;
-  // box-shadow: 3px 3px 3px rgba(167, 167, 167, 0.255);
   padding: 1rem;
-  // margin: 1rem;
   z-index: 10;
   height: 20vh;
+  background-color: $theme-dark;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .search-input {
-  border: 1px solid black;
+  border: 1px solid white;
+  background-color: $theme-dark;
+  color: white;
   font-size: 1rem;
-  padding: .75rem;
+  padding: 0.5rem;
+  margin-right: 0.75rem;
   width: 20rem;
+  font-family: $font-primary;
+}
+
+.search-input::placeholder {
+  color: rgba(255, 255, 255, 0.753);
+}
+
+@media (max-width: $screen-xs) {
+  .App {
+    h1 {
+      font-size: 2rem;
+    }
+  }
+
+  .search-input {
+    width: 90%;
+    margin-right: 0;
+  }
 }
