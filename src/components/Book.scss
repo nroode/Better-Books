@@ -9,7 +9,7 @@
   width: 25rem;
   text-align: center;
   display: flex;
-  background: linear-gradient(to right, #000b2900 15%, white 15%);
+  background: linear-gradient(to right, #000b2900 15%, $theme-light 15%);
   text-align: left;
 
   h3 {
@@ -79,11 +79,11 @@
   font-weight: 700;
   text-transform: uppercase;
   background-color: $theme-accent;
-  color: white;
+  color: $theme-light;
 
   &:hover {
     background-color: #f24333;
-    color: white;
+    color: $theme-light;
   }
 }
 

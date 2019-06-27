@@ -31,16 +31,18 @@ class App extends Component {
       query +
       "&startIndex=0&maxResults=20&key=AIzaSyC10CZ4XkZNmjshEPGYL_gQIREG5tJnFeQ";
 
-    axios.get(`${fullURL}`).then(res => {
-      const bookList = res.data.items;
-      this.setState({
-        bookList,
-        isLoading: false
+    axios
+      .get(`${fullURL}`)
+      .then(res => {
+        const bookList = res.data.items;
+        this.setState({
+          bookList,
+          isLoading: false
+        });
+      })
+      .catch(err => {
+        console.log(err);
       });
-    });
-    //   .catch(err => {
-    //     console.log(err);
-    // });
   }
 
   render() {
@@ -57,8 +59,7 @@ class App extends Component {
             {this.state.bookList.length === 0 &&
             this.state.isLoading === false ? (
               <div className="book-results-message">
-                Type in a subject, author, or book title above to begin your
-                search
+                Type in a subject, author, or book title to begin your search
               </div>
             ) : (
               ""

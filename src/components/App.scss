@@ -10,15 +10,15 @@
   }
 
   h1 {
+    color: $theme-light;
     font-size: 4rem;
     text-transform: uppercase;
-    color: rgb(255, 255, 255);
   }
 
   .finder {
     font-family: $font-secondary;
-    text-transform: none;
     letter-spacing: 0.25rem;
+    text-transform: none;
   }
 }
 
@@ -32,7 +32,7 @@
 
   &-message {
     font-size: 1.2rem;
-    color: white;
+    color: $theme-light;
     margin: 5rem;
     max-width: 300px;
     line-height: 1.5;
@@ -51,9 +51,9 @@
 }
 
 .search-input {
-  border: 1px solid white;
+  border: 1px solid $theme-light;
   background-color: $theme-dark;
-  color: white;
+  color: $theme-light;
   font-size: 1rem;
   padding: 0.5rem;
   margin-right: 0.75rem;
