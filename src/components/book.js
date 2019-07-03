@@ -28,7 +28,7 @@ const Book = props => (
           {props.publisher ? props.publisher : "Unspecified"}
         </p>
       </div>
-      <a href={props.extLink}>
+      <a href={props.extLink} target="_blank">
         <button className="btn">More</button>
       </a>
     </div>
