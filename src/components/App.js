@@ -11,7 +11,8 @@ class App extends Component {
     super(props);
     this.state = {
       bookList: [],
-      isLoading: false
+      isLoading: false,
+      error: false
     };
   }
 
@@ -34,18 +35,33 @@ class App extends Component {
     axios
       .get(`${fullURL}`)
       .then(res => {
-        const bookList = res.data.items;
-        this.setState({
-          bookList,
-          isLoading: false
-        });
+        if (res.data.items.length > 0) {
+          const bookList = res.data.items;
+          console.log("data");
+          this.setState({
+            error: false,
+            bookList,
+            isLoading: false
+          });
+        } else {
+          this.setState({
+            error: true,
+            bookList: [],
+            isLoading: false
+          });
+        }
       })
       .catch(err => {
-        console.log(err);
+        this.setState({
+          error: true,
+          bookList: [],
+          isLoading: false
+        });
       });
   }
 
   render() {
+    let { bookList, isLoading, error } = this.state;
     return (
       <div>
         <div className="App">
@@ -55,28 +71,38 @@ class App extends Component {
             </h1>
             <Search handleQuery={this.handleQuery} />
           </div>
+
           <div className="book-results">
-            {this.state.bookList.length === 0 &&
-            this.state.isLoading === false ? (
+            {error ? (
               <div className="book-results-message">
-                Type in a subject, author, or book title to begin your search
+                No results found. Try another search.
               </div>
             ) : (
-              ""
-            )}
-            {this.state.isLoading ? (
-              <div className="book-results-message">loading...</div>
-            ) : (
-              this.state.bookList.map(book => (
-                <Book
-                  key={book.id}
-                  image={book.volumeInfo.imageLinks}
-                  title={book.volumeInfo.title}
-                  publisher={book.volumeInfo.publisher}
-                  author={book.volumeInfo.authors}
-                  extLink={book.volumeInfo.infoLink}
-                />
-              ))
+              <div className="book-results-container">
+                {bookList.length === 0 && isLoading === false ? (
+                  <div className="book-results-message">
+                    Type in a subject, author, or book title to begin your
+                    search
+                  </div>
+                ) : (
+                  ""
+                )}
+
+                { isLoading ? (
+                  <div className="book-results-message">loading...</div>
+                ) : (
+                  bookList.map(book => (
+                    <Book
+                      key={book.id}
+                      image={book.volumeInfo.imageLinks}
+                      title={book.volumeInfo.title}
+                      publisher={book.volumeInfo.publisher}
+                      author={book.volumeInfo.authors}
+                      extLink={book.volumeInfo.infoLink}
+                    />
+                  ))
+                )}
+              </div>
             )}
           </div>
         </div>

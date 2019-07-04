@@ -23,17 +23,22 @@
 }
 
 .book-results {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  
   overflow: auto;
   height: 80vh;
   background: linear-gradient($theme-dark, rgba(255, 255, 255, 0.637));
+    
+  
+  &-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 
   &-message {
     font-size: 1.2rem;
     color: $theme-light;
-    margin: 5rem;
+    margin: 5rem auto;
     max-width: 300px;
     line-height: 1.5;
     font-family: $font-secondary;
