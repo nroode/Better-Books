@@ -22,9 +22,18 @@ class App extends Component {
     const query = e.target.name.value;
     query
       ? this.getBooks(query)
-      : alert("Please enter a topic for your search");
+      : this.noInput()
+      
     e.target.name.value = "";
   };
+
+  noInput() {
+    alert("Please enter a topic for your search");
+    this.setState({
+      error: false,
+      isLoading: false
+    });
+  }
 
   getBooks(query) {
     var fullURL =
