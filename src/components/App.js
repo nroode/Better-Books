@@ -17,8 +17,8 @@ class App extends Component {
   }
 
   handleQuery = e => {
-    this.setState({ isLoading: true });
     e.preventDefault();
+    this.setState({ isLoading: true });
     const query = e.target.name.value;
     query
       ? this.getBooks(query)
@@ -35,7 +35,7 @@ class App extends Component {
     });
   }
 
-  getBooks(query) {
+  getBooks = query => {
     var fullURL =
       "https://www.googleapis.com/books/v1/volumes?q=" +
       query +
@@ -45,8 +45,7 @@ class App extends Component {
       .get(`${fullURL}`)
       .then(res => {
         if (res.data.items.length > 0) {
-          const bookList = res.data.items;
-          console.log("data");
+          const bookList = res.data.items.filter(book => (book.volumeInfo.title.toLowerCase() !== `missing title`));
           this.setState({
             error: false,
             bookList,
