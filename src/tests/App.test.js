@@ -30,29 +30,39 @@ it('Search renders without crashing', () => {
 });
 
 it('Book renders correctly', () => {
-  const wrapper = shallow(<Book />);
-
+  const wrapper = shallow(<Book />)
 });
 
 
 test('calls axios and returns books', async () => {
 
   mockAxios.get.mockImplementationOnce(()=> Promise.resolve({
-    data: {
-      results: ['test']
-    }
+      data: {
+        results: {
+          items: [
+            {
+              volumeInfo: { title: "test" }
+            }
+          ]
+        }
+      }
   }));
   
   const wrapper = shallow(<App />);
-  const books = wrapper.instance().getBooks('cat');
-  
+  const books = await wrapper.instance().getBooks();
   console.log(books);
 
-  // mockAxios.get(() =>
-  // Promise.resolve({ data: { results: ['test']} 
-  // })
-  // );
-  // expect(mockAxios.get).toEqual(['test']);
+  expect(books).toEqual({
+    data: {
+      results: {
+        items: [
+          {
+            volumeInfo: { title: "test" }
+          }
+        ]
+      }
+    }
+});
 
 })
 

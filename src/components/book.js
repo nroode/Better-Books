@@ -13,7 +13,7 @@ const Book = props => (
           className="book-img"
         />
       ) : (
-        <img src={Unavailable} className="book-img-none" alt="unavailable"/>
+        <img src={Unavailable} className="book-img book-img-none" alt="unavailable"/>
       )}
     </div>
     <div className="book-details">
